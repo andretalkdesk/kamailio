@@ -1,0 +1,36 @@
+
+
+
+|rms_bridge_f| >> create a_leg and b_leg
+               >> link them and add them to the sessions
+               >> suspend a_leg connection
+               ---------------------------
+               | caller-leg | callee-leg |
+               ---------------------------
+               |offer|answer|offer|answer|
+               ---------------------------
+               |  x  |      |  x  |      | // create a resulting offer depending on codecs etc.
+               ---------------------------
+               >> BRIDING
+
+|BRIDGING|     >> INVITE b_leg using the callee-leg offer's
+               >> wait for transaction response/timeout
+               ---------------------------
+               | caller-leg | callee-leg |
+               ---------------------------
+               |offer|answer|offer|answer|
+               ---------------------------
+               |  x  |  x   |  x  |  x   | // create a resulting answer depending on codecs etc.
+               ---------------------------
+               >> BRIDGED
+
+|BRIDGED|      >> continue a_leg considering the state of b_leg
+
+
+
+TODO:
+
+- test/implement CANCEL
+- test FAILURE initial and in dialog
+- test/implement RE-INVITE with/without codec modification
+- enforce state control when receiving re-transmission of multiple INITIAL INVITEs / BYEs
